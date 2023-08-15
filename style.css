@@ -53,7 +53,7 @@ body{
 
 /*Cards*/
 
-.compraform{
+.compraFormulario{
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
@@ -95,4 +95,90 @@ body{
 
 .card button:hover{
     opacity: 0.7;
+}
+
+
+/*carrito*/
+
+.pag-tit{
+    width: 80%;
+    margin: 0 10%;
+    max-height: 88vh;
+    color:white;
+    background-color: rgb(12, 12, 12);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /*tipado*/
+    position: fixed;
+    overflow: auto;
+    z-index: 10;
+    top: 12vh;
+    scrollbar-color: n0ne;
+}
+
+.pag-tit ::-webkit-scrollbar{
+    display: none;
+}
+
+.pag-titulo{
+    display: flex;
+    justify-content: space-around;
+    background-color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
+    width: 100%;
+}
+
+.pag-titutlo-title{
+    justify-self: start;
+}
+
+.boton-cerrar{
+    cursor: pointer;
+    margin-left: 90%;
+}
+
+.pag-titulo {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    width: 70%;
+    margin: 10px;
+}
+
+.contenido-compra {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    width: 70%;
+    margin: 10px;
+    border: 4px solid white;
+}
+
+.contenido-compra .img-2{
+    height: 100px;
+    width: 100px;
+}
+
+.total-final{
+    font-size: 25px;
+    padding: 20px;
+    text-align: center;
+    padding-top: 20px;
+    background-color: rgb(0, 0, 0);
+}
+
+.delete-prod{
+    cursor: pointer;
+    color: red;
+}
+
+.sumar{
+    cursor: pointer;
+}
+
+.restar{
+    cursor: pointer;
 }
