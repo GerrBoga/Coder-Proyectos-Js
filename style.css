@@ -182,3 +182,7 @@ body{
 .restar{
     cursor: pointer;
 }
+
+.swal2-confirm.swal2-styled{
+    background-color: rgb(177, 182, 119);
+}

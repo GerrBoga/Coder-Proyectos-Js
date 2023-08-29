@@ -1,112 +1,22 @@
-alert("Bienvenido a Frigorifico el Sol");
-
 const compraForm = document.getElementById("compraForm")
-
-/*PRODUCTOS*/
-const productos = [
-    {
-        id: 1,
-        nombre: "Roast Beef", 
-        precio: 1250,
-        img:"assets/imagenes/roastb.png",
-        cantidad: 1
-    },
-    {
-        id: 2,
-        nombre: "Asado", 
-        precio: 950,
-        img:"assets/imagenes/asado.png",
-        cantidad: 1
-    },
-    {
-        id: 3,
-        nombre: "Recorte", 
-        precio: 650,
-        img:"assets/imagenes/recorte.png",
-        cantidad: 1
-    },
-    {
-        id: 4,
-        nombre: "Nalga c/t", 
-        precio: 1550,
-        img: "assets/imagenes/nalga-con-tapa.jpg",
-        cantidad: 1
-    },
-    {
-        id: 5,
-        nombre: "Nalga s/t", 
-        precio: 1650,
-        img: "assets/imagenes/n-s-t.png",
-        cantidad: 1
-    }
-];
-
-
-/*let seUsuario = prompt("Usted es Fernando o Cliente? Escriba la respuesta en el siguiente campo").toLowerCase()
-while (seUsuario) {
-    if (seUsuario == "cliente"){
-        alert("¿Dese hacer una compra?")
-        console.log("Ingreso un cliente.")
-    
-    }else if(seUsuario == "fernando") {
-        alert("Bienvenido Fernando/Lucas u Oficina, a continuacion vamos a verificar su identidad con su nombre de usuario y contraseña, recuerdes que tiene solo 3 intentos")
-        // Creando funcion para ingreso de usuario con limite de intentos.
-        function ingresoFer() {
-            // Usuario y contraseña 
-            const usuarioFer = "Frigosol"
-            const contraFer = "frigo1290"
-             
-            let intentos = 3
-          
-            while (intentos > 0) {
-              const usuario = prompt("Ingrese el usuario")
-              const contrasenia = prompt("Ingrese la contraseña")
-          
-              if (usuario === usuarioFer && contrasenia === contraFer) {
-                     alert("Bienvenido, tiene el control.")
-                }
-            }
-        }
-
-    }
-}*/
-
-/*INICIO CON NOMBRES*/
-function mostrarPasos(){
-
-    const nombreU1 = "fernando"; //Este seria mi primer usuario (el jefe)
-    const nombreU2 = "lucas";    //Este segundo usuario corresponderia (al encargado)
-
-    let nombreN = prompt("Ingrese su nombre") //En este prompt quiero que cuando ingresan tengan que poner la informacion de su nombre.
-
-    if (nombreN == nombreU1){
-        console.log("No hay control");
-        alert("Hola Fernandito");
-    } else if(nombreN == nombreU2){
-        console.log("No hiciste ningun control aun");
-        alert("Hola Lucas");
-    } else {
-        alert("Hola " + nombreN +", que buscas?");
-        console.log("Cliente nuevo: " + nombreN );
-    }
-
-}
-mostrarPasos();
-
 const verCarro = document.getElementById("ver-carrito");
 const paginaTitulo = document.getElementById("pag-titulo");
-                        /*GET ITEM*/
+
+/*GET ITEM*/
 let carrito = JSON.parse(localStorage.getItem("Ccarrito")) || [];
 
-/*DATOS DE COMPRA*/ 
-productos.forEach((prod)=>{
+const getProducts= async ()=> {
+    const response = await fetch("data.json");
+    const data = await response.json();
+
+    /*DATOS DE COMPRA*/ 
+    data.forEach((prod)=>{
     let content= document.createElement("div");
     content.className = "card";
     content.innerHTML= `
     <img src="${prod.img}">
     <h3>${prod.nombre}</h3>
     <p class="price">${prod.precio} $</p>
-    <p>Cantidad: ${prod.cantidad}</p>
     `;
 
     compraForm.append(content);
@@ -136,11 +46,18 @@ productos.forEach((prod)=>{
                 precio: prod.precio,
                 cantidad: prod.cantidad,
             });
+            console.log(carrito);
+            saveLocal();
         }
-        console.log(carrito);
-        saveLocal();
     });
-});
+    });
+
+};
+
+getProducts();
+
+
+
 
 /*SET ITEM*/
 const saveLocal = ()=> {
@@ -188,6 +105,7 @@ const pasarCarrito = () => {
       paginaTitulo.append(carritoContentido);
 
         let restar = carritoContentido.querySelector(".restar");
+        
         restar.addEventListener("click", ()=> {
             if(prod.cantidad !== 1){
                 prod.cantidad--;
@@ -198,7 +116,8 @@ const pasarCarrito = () => {
 
 
         let sumar = carritoContentido.querySelector(".sumar");
-        restar.addEventListener("click", ()=> {
+
+        sumar.addEventListener("click", ()=> {
             prod.cantidad++;
             saveLocal();
             pasarCarrito();
@@ -207,6 +126,12 @@ const pasarCarrito = () => {
 
       let eliminar = carritoContentido.querySelector(".delete-prod");
       eliminar.addEventListener("click", ()=> {
+        Swal.fire({
+            title: 'Atencion',
+            text: 'Esta seguro que desea eliminar el producto?',
+            icon: 'question',
+            confirmButtonText: 'Aceptar'
+        })
         eliminarProducto(prod.id);
       });
 

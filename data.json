@@ -1,0 +1,37 @@
+[
+    {
+        "id": 1,
+        "nombre": "Roast Beef", 
+        "precio": 1250,
+        "img":"assets/imagenes/roastb.png",
+        "cantidad": 1
+    },
+    {
+        "id": 2,
+        "nombre": "Asado", 
+        "precio": 950,
+        "img":"assets/imagenes/asado.png",
+        "cantidad": 1
+    },
+    {
+        "id": 3,
+        "nombre": "Recorte", 
+        "precio": 650,
+        "img":"assets/imagenes/recorte.png",
+        "cantidad": 1
+    },
+    {
+        "id": 4,
+        "nombre": "Nalga c/t", 
+        "precio": 1550,
+        "img": "assets/imagenes/nalga-con-tapa.jpg",
+        "cantidad": 1
+    },
+    {
+        "id": 5,
+        "nombre": "Nalga s/t", 
+        "precio": 1650,
+        "img": "assets/imagenes/n-s-t.png",
+        "cantidad": 1
+    }
+]
